@@ -3,6 +3,14 @@ const request = require('supertest');
 const app = require('../lib/app')
 const Actor = require('../lib/models/Actor')
 
+
+
+const actor = { 
+    name: 'Robert Downey Jr',
+    dob: '1965-04-04',
+    pob: 'Manhattan, New York, NY'
+};
+
 describe('ripe-banana actor routes', () => { 
     beforeEach(() => { 
         return db.sync({ force: true });
@@ -13,7 +21,7 @@ describe('ripe-banana actor routes', () => {
     it('creates a new Actor', () => { 
         const newActor = { 
             name: 'Robert Downey Jr',
-            dob: '04-04-1965',
+            dob: '1965-04-04',
             pob: 'Manhattan, New York, NY'
         };
 
