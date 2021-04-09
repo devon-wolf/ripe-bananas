@@ -58,7 +58,7 @@ describe('ripe-bananas routes', () => {
   })
   it('updates a Studio by id', async () => {
     return request(app)
-      .put('/api/v1/studios/1')
+      .patch('/api/v1/studios/1')
       .send({
         name: 'Bar Studios',
         city: 'Bortland',
