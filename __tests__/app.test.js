@@ -46,5 +46,15 @@ describe('ripe-bananas routes', () => {
         }])
       })
   })
+  it('gets a Studio by id', async () => {
+    return request(app)
+      .get('/api/v1/studios/1')
+      .then((res) => {
+        expect(res.body).toEqual({
+          ...studio,
+          id: 1
+        })
+      })
+  })
 
 });
