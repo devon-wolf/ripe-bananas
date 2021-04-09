@@ -56,5 +56,23 @@ describe('ripe-bananas routes', () => {
         })
       })
   })
-
+  it('updates a Studio by id', async () => {
+    return request(app)
+      .put('/api/v1/studios/1')
+      .send({
+        name: 'Bar Studios',
+        city: 'Bortland',
+        state: 'Boregon',
+        country: 'Bunited Bates'
+      })
+      .then((res) => {
+        expect(res.body).toEqual({
+          name: 'Bar Studios',
+          city: 'Bortland',
+          state: 'Boregon',
+          country: 'Bunited Bates',
+          id: 1
+        })
+      })
+  })
 });
