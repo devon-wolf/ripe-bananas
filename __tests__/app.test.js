@@ -1,10 +1,21 @@
 const db = require('../lib/utils/database');
 const request = require('supertest');
 const app = require('../lib/app');
+const Studio = require('../lib/models/Studio');
+
+const studio = {
+  name: 'Star Studios',
+  city: 'Portland',
+  state: 'Oregon',
+  country: 'United States'
+};
 
 describe('ripe-bananas routes', () => {
   beforeEach(() => {
-    return db.sync({ force: true });
+    return db.sync({force: true});
+  });
+  beforeEach(async () => {
+    originalStudio = await Studio.create(studio);
   });
 
   it('creates a new Studio', () => {
@@ -18,11 +29,21 @@ describe('ripe-bananas routes', () => {
     return request(app)
       .post('/api/v1/studios')
       .send(newStudio)
-      .then((res) =>  {
+      .then((res) => {
         expect(res.body).toEqual({
           ...newStudio,
-          id: 1
+          id: 2
         })
+      })
+  })
+  it('gets all Studios', async () => {
+    return request(app)
+      .get('/api/v1/studios')
+      .then((res) => {
+        expect(res.body).toEqual([{
+          ...studio,
+          id: 1
+        }])
       })
   })
 
