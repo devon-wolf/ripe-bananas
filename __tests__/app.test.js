@@ -18,7 +18,7 @@ describe('ripe-bananas routes', () => {
     originalStudio = await Studio.create(studio);
   });
 
-  it('creates a new Studio', () => {
+  it.skip('creates a new Studio', () => {
     const newStudio = {
       name: 'Star Studios',
       city: 'Portland',
