@@ -63,4 +63,17 @@ describe('ripe-bananas film routes', () => {
         ]);
       });
   });
+
+  it('gets a single film by id', () => {
+    return request(app)
+      .get('/api/v1/films/1')
+      .then((res) => {
+        expect(res.body).toEqual({
+          id: 1,
+          title: 'Forgotten Martians',
+          studio: 7,
+          released: 1976,
+        });
+      });
+  });
 });
