@@ -41,6 +41,11 @@ describe('reviews routes', () => {
 
 
 	it('gets all reviews', () => {
-
-	})
+		return request(app)
+			.get('/api/v1/reviews')
+			.then(res => expect(res.body).toEqual([{
+				id: 1,
+				...seedReview
+			}]));
+	});
 });
