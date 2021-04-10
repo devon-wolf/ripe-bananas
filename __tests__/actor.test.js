@@ -4,7 +4,6 @@ const app = require('../lib/app')
 const Actor = require('../lib/models/Actor')
 
 
-
 const actor = { 
     name: 'Robert Downey Jr',
     dob: '1965-04-04',
@@ -35,4 +34,25 @@ describe('ripe-banana actor routes', () => {
                 })
             })
     })
-})
+    it('gets all Actors', async () => { 
+        return request(app)
+            .get('api/v1/actors')
+            .then((res) => {
+                expect(res.body).toEqual([{
+                    ...actor,
+                    id: 1,
+                }])
+            })
+    })
+    it('gets an actor by id', async () => { 
+        return request(app)
+            .get('/api/v1/actors/1')
+            .then((res) => { 
+                expect(res.body).toEqual({
+                    ...actor,
+                    id: 1
+                })
+            })
+    })
+
+});
