@@ -1,3 +1,4 @@
+// require('../lib/models/associations')
 const db = require('../lib/utils/database');
 const request = require('supertest');
 const app = require('../lib/app');
@@ -7,6 +8,11 @@ const reviewer = {
     name: 'Amadaeus Coconut',
     company: 'Island Time Reviews',
 };
+// const review = {
+//     reviewerId = reviewer.id,
+
+// }
+
 
 describe('ripe-bananas routes', () => {
     beforeEach(() => {
@@ -44,5 +50,33 @@ describe('ripe-bananas routes', () => {
             })
     })
 
+    //get by id
+    // it('gets a reviewer and their reviews when given an id', () => {
+    //     return request(app)
+    //         .get('/api/v1/reviewers/1')
+    //         .then((res) => {
+    //             expect(res.body).toEqual([{
+    //                 ...reviewer,
+    //                 id: 1
+    //             }])
+    //         })
+    // })
+
+    it('updates a Reviewer given their id', () => {
+
+        return request(app)
+            .put('/api/v1/reviewers/1')
+            .send({
+                name: 'Sparkle Lord',
+                company: 'In A Galaxy Far Away.. From You... Reviews.'
+            })
+            .then((res) => {
+                expect(res.body).toEqual({
+                    name: 'Sparkle Lord',
+                    company: 'In A Galaxy Far Away.. From You... Reviews.',
+                    id: 1
+                })
+            })
+    })
 
 });
