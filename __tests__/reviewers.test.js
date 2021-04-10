@@ -37,10 +37,10 @@ describe('ripe-bananas routes', () => {
         return request(app)
             .get('/api/v1/reviewers')
             .then((res) => {
-                expect(res.body).toEqual({
+                expect(res.body).toEqual([{
                     ...reviewer,
                     id: 1
-                })
+                }])
             })
     })
 
