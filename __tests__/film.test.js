@@ -55,9 +55,10 @@ describe('ripe-bananas film routes', () => {
       .then((res) => {
         expect(res.body).toEqual([
           {
-            title: 'The Vacant Owl',
-            studio: 6,
-            released: 2011,
+            id: 1,
+            title: 'Forgotten Martians',
+            studio: 7,
+            released: 1976,
           },
         ]);
       });
