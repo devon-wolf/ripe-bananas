@@ -32,6 +32,17 @@ describe('ripe-bananas routes', () => {
                 })
             })
     })
+    it('gets all Reviewers', () => {
+
+        return request(app)
+            .get('/api/v1/reviewers')
+            .then((res) => {
+                expect(res.body).toEqual({
+                    ...reviewer,
+                    id: 1
+                })
+            })
+    })
 
 
 });
