@@ -85,6 +85,7 @@ describe('ripe-bananas routes', () => {
             .delete('/api/v1/reviewers/1')
             .then((res) => {
                 expect(res.body).toEqual({
+                    success: '👻'
                 })
             })
     })
