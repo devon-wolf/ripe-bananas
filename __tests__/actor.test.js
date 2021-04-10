@@ -45,15 +45,15 @@ describe('ripe-banana actor routes', () => {
                 }])
             })
     })
-    // it('gets an actor by id', async () => { 
-    //     return request(app)
-    //         .get('/api/v1/actors/1')
-    //         .then((res) => { 
-    //             expect(res.body).toEqual({
-    //                 ...actor,
-    //                 id: 1
-    //             })
-    //         })
-    // })
+    it('gets an actor by id', async () => { 
+        return request(app)
+            .get('/api/v1/actors/1')
+            .then((res) => { 
+                expect(res.body).toEqual({
+                    ...actor,
+                    id: 1
+                })
+            })
+    })
 
 });
