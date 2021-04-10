@@ -1,4 +1,4 @@
-require('../models/associations');
+// require('../models/associations');
 
 const db = require('../lib/utils/database');
 const request = require('supertest');
@@ -46,6 +46,20 @@ describe('ripe-bananas film routes', () => {
           ...newFilm,
           id: 2,
         });
+      });
+  });
+
+  it('gets all films', () => {
+    return request(app)
+      .get('/api/v1/films')
+      .then((res) => {
+        expect(res.body).toEqual([
+          {
+            title: 'The Vacant Owl',
+            studio: 6,
+            released: 2011,
+          },
+        ]);
       });
   });
 });
