@@ -48,4 +48,10 @@ describe('reviews routes', () => {
 				...seedReview
 			}]));
 	});
+
+	it('deletes a review', () => {
+		return request(app)
+			.delete('/api/v1/reviews/1')
+			.then(res => expect(res.body).toEqual({ status: 'DESTROYED' }));
+	});
 });
