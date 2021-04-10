@@ -16,14 +16,14 @@ describe('ripe-bananas routes', () => {
         originalReviewer = await Reviewer.create(reviewer);
     });
 
-    it('creates a new Studio', () => {
+    it('creates a new Reviewer', () => {
         const newReviewer = {
             name: 'Lucille Funkhousen',
             company: 'Give It To Me Straight, Reviews',
         };
 
         return request(app)
-            .post('/api/v1/studios')
+            .post('/api/v1/reviewers')
             .send(newReviewer)
             .then((res) => {
                 expect(res.body).toEqual({
