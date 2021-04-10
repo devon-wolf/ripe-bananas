@@ -79,5 +79,15 @@ describe('ripe-bananas routes', () => {
             })
     })
 
+    it('deletes a Reviewer given their id if they have 0 reviews', () => {
+
+        return request(app)
+            .delete('/api/v1/reviewers/1')
+            .then((res) => {
+                expect(res.body).toEqual({
+                })
+            })
+    })
+
 
 });
