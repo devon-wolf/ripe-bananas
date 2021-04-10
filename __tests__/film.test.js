@@ -7,12 +7,12 @@ const film = {
   title: 'Forgotten Martians',
   studio: 7,
   released: 1976,
-  cast: [
-    {
-      role: 'Gerard Socksmith',
-      actor: 14,
-    },
-  ],
+  //   cast: [
+  //     {
+  //       role: 'Gerard Socksmith',
+  //       actor: 14,
+  //     },
+  //   ],
 };
 
 describe('ripe-bananas film routes', () => {
@@ -28,12 +28,12 @@ describe('ripe-bananas film routes', () => {
       title: 'The Vacant Owl',
       studio: 6,
       released: 2011,
-      cast: [
-        {
-          role: 'Mary Feather',
-          actor: 20,
-        },
-      ],
+      //   cast: [
+      //     {
+      //       role: 'Mary Feather',
+      //       actor: 20,
+      //     },
+      //   ],
     };
 
     return request(app)
