@@ -6,10 +6,14 @@ const { createFakeReviews } = require('../lib/utils/data-generator');
 
 const seedReview = {
 	rating: 2,
-	ReviewerId: 1,
 	review: 'This is almost the worst thing ever',
 	FilmId: 2
 }
+
+const reviewer = {
+    name: 'Amadaeus Coconut',
+    company: 'Island Time Reviews',
+};
 
 describe('reviews routes', () => {
 	beforeEach(() => {
@@ -18,21 +22,30 @@ describe('reviews routes', () => {
 
 	beforeEach(async () => {
 		await request(app)
+			.post('/api/v1/reviewers')
+			.send(reviewer);
+
+		await request(app)
 			.post('/api/v1/reviews')
-			.send(seedReview);
+			.send({
+				...seedReview,
+				ReviewerId: 1
+			});
 	});
 
 	it('creates a new review', () => {
 		const newReview = {
 			FilmId: 1,
-			ReviewerId: 1,
 			rating: 5,
 			review: 'This is amazing',
 		};
 
 		return request(app)
 			.post('/api/v1/reviews')
-			.send(newReview)
+			.send({
+					...newReview,
+					ReviewerId: 1
+				})
 			.then(res => expect(res.body).toEqual({
 				id: 2,
 				...newReview

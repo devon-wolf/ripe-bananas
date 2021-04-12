@@ -11,12 +11,6 @@ const reviewer = {
 
 };
 
-const reviewertoo = {
-    name: 'Batman',
-    company: 'Bat Time Reviews',
-    id: 2
-};
-
 
 describe('ripe-bananas routes', () => {
     beforeEach(() => {
