@@ -11,12 +11,6 @@ const reviewer = {
 
 };
 
-const reviewertoo = {
-    name: 'Batman',
-    company: 'Bat Time Reviews',
-    id: 2
-};
-
 
 describe('ripe-bananas routes', () => {
     beforeEach(() => {
@@ -61,7 +55,6 @@ describe('ripe-bananas routes', () => {
             .send({
                 rating: 2,
                 review: 'blah',
-                FilmId: 2,
                 ReviewerId: 1,
             })
         return request(app)
@@ -74,7 +67,6 @@ describe('ripe-bananas routes', () => {
                     Reviews: [{
                         rating: 2,
                         review: 'blah',
-                        FilmId: 2,
                         ReviewerId: 1,
                         id: 1,
                     }]
