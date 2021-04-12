@@ -12,13 +12,13 @@ const studio = {
 
 describe.skip('ripe-bananas routes', () => {
   beforeEach(() => {
-    return db.sync({ force: true });
+    return db.sync({force: true});
   });
   beforeEach(async () => {
     originalStudio = await Studio.create(studio);
   });
 
-  it.skip('creates a new Studio', () => {
+  it('creates a new Studio', () => {
     const newStudio = {
       name: 'Star Studios',
       city: 'Portland',

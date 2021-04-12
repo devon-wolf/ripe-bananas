@@ -1,4 +1,4 @@
-// require('../lib/models/associations');
+require('../lib/models/associations');
 const db = require('../lib/utils/database')
 const request = require('supertest');
 const app = require('../lib/app')
@@ -8,8 +8,16 @@ const Film = require('../lib/models/Film');
 const actor = { 
     name: 'Robert Downey Jr',
     dob: '1965-04-04',
-    pob: 'Manhattan, New York, NY'
+    pob: 'Manhattan, New York, NY',
+    FilmId: '1'
 };
+const film = [{ 
+    id: '1',
+    title: 'Iron Man',
+    release: '2008-05-02',
+    ActorId: '1'
+
+}]
 
 describe('ripe-banana actor routes', () => { 
     beforeEach(() => { 
@@ -18,6 +26,10 @@ describe('ripe-banana actor routes', () => {
     beforeEach(async () => { 
         originalActor = await Actor.create(actor)
     })
+    beforeEach(async () => { 
+      originalFilm = await Film.create(film)
+    })
+
     it('creates a new Actor', () => { 
         const newActor = { 
             name: 'Robert Downey Jr',
@@ -56,6 +68,7 @@ describe('ripe-banana actor routes', () => {
                 })
             })
     })
+    
     it('gets an actor by id with Film Join', async () => { 
         return request(app)
             .get('/api/v1/actors/1')
@@ -63,11 +76,7 @@ describe('ripe-banana actor routes', () => {
                 expect(res.body).toEqual({
                     ...actor,
                     id: 1,
-                    Film: { 
-                        id: '1',
-                        title: 'Iron Man',
-                        release: '2008-05-02'
-                    }
+                    films : [film]
                 })
             })
     })

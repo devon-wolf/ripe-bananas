@@ -11,7 +11,7 @@ const role = {
   film: 117,
 };
 
-describe('ripe-bananas film_actor routes', () => {
+describe.skip('ripe-bananas film_actor routes', () => {
   beforeEach(() => {
     return db.sync({ force: true });
   });

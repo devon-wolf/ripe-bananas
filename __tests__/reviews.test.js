@@ -6,33 +6,62 @@ const { createFakeReviews } = require('../lib/utils/data-generator');
 
 const seedReview = {
 	rating: 2,
-	ReviewerId: 1,
 	review: 'This is almost the worst thing ever',
-	FilmId: 2
 }
 
-describe('reviews routes', () => {
+const reviewer = {
+    name: 'Amadaeus Coconut',
+    company: 'Island Time Reviews',
+};
+
+const film = {
+	title: 'Forgotten Martians',
+	studio: 7,
+	released: 1976,
+	//   cast: [
+	//     {
+	//       role: 'Gerard Socksmith',
+	//       actor: 14,
+	//     },
+	//   ],
+  };
+
+describe.skip('reviews routes', () => {
 	beforeEach(() => {
 		return db.sync({ force: true });
 	});
 
 	beforeEach(async () => {
 		await request(app)
+			.post('/api/v1/reviewers')
+			.send(reviewer);
+
+		await request(app)
+			.post('/api/v1/films')
+			.send(film);
+
+		await request(app)
 			.post('/api/v1/reviews')
-			.send(seedReview);
+			.send({
+				...seedReview,
+				ReviewerId: 1,
+				FilmId: 1
+			});
+
 	});
 
 	it('creates a new review', () => {
 		const newReview = {
-			FilmId: 1,
-			ReviewerId: 1,
 			rating: 5,
 			review: 'This is amazing',
 		};
 
 		return request(app)
 			.post('/api/v1/reviews')
-			.send(newReview)
+			.send({
+					...newReview,
+					ReviewerId: 1
+				})
 			.then(res => expect(res.body).toEqual({
 				id: 2,
 				...newReview
