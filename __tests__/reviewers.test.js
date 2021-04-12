@@ -8,10 +8,13 @@ const reviewer = {
     name: 'Amadaeus Coconut',
     company: 'Island Time Reviews',
 };
-// const review = {
-//     reviewerId = reviewer.id,
+const review = {
+    id: reviewer.id,
+    rating: 3,
+    review: 'not good',
+    film: 'film stuff'
 
-// }
+};
 
 
 describe('ripe-bananas routes', () => {
@@ -50,17 +53,17 @@ describe('ripe-bananas routes', () => {
             })
     })
 
-    //get by id
-    // it('gets a reviewer and their reviews when given an id', () => {
-    //     return request(app)
-    //         .get('/api/v1/reviewers/1')
-    //         .then((res) => {
-    //             expect(res.body).toEqual([{
-    //                 ...reviewer,
-    //                 id: 1
-    //             }])
-    //         })
-    // })
+    // get by id
+    it('gets a reviewer and their reviews when given an id', () => {
+        return request(app)
+            .get('/api/v1/reviewers/1')
+            .then((res) => {
+                expect(res.body).toEqual({
+                    ...reviewer,
+                    id: 1
+                })
+            })
+    })
 
     it('updates a Reviewer given their id', () => {
 
@@ -92,3 +95,5 @@ describe('ripe-bananas routes', () => {
 
 
 });
+
+
