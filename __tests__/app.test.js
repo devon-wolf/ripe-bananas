@@ -18,7 +18,7 @@ describe.skip('ripe-bananas routes', () => {
     originalStudio = await Studio.create(studio);
   });
 
-  it('creates a new Studio', () => {
+  it.skip('creates a new Studio', () => {
     const newStudio = {
       name: 'Star Studios',
       city: 'Portland',
@@ -32,6 +32,7 @@ describe.skip('ripe-bananas routes', () => {
       .then((res) => {
         expect(res.body).toEqual({
           ...newStudio,
+<<<<<<< HEAD
           id: 2,
         });
       });
@@ -49,6 +50,23 @@ describe.skip('ripe-bananas routes', () => {
       });
   });
   it('gets a Studio by id', async () => {
+=======
+          id: 2
+        })
+      })
+  })
+  it.skip('gets all Studios', async () => {
+    return request(app)
+      .get('/api/v1/studios')
+      .then((res) => {
+        expect(res.body).toEqual([{
+          ...studio,
+          id: 1
+        }])
+      })
+  })
+  it.skip('gets a Studio by id', async () => {
+>>>>>>> 848dbb53572b80539d7a63f822d9d3ad64ff734a
     return request(app)
       .get('/api/v1/studios/1')
       .then((res) => {
