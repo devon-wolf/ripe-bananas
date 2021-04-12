@@ -3,7 +3,7 @@ const db = require('../lib/utils/database')
 const request = require('supertest');
 const app = require('../lib/app')
 const Actor = require('../lib/models/Actor')
-
+const Film = require('../lib/models/Film');
 
 const actor = { 
     name: 'Robert Downey Jr',
@@ -52,6 +52,21 @@ describe('ripe-banana actor routes', () => {
                 expect(res.body).toEqual({
                     ...actor,
                     id: 1
+                })
+            })
+    })
+    it('gets an actor by id with Film Join', async () => { 
+        return request(app)
+            .get('/api/v1/actors/1')
+            .then((res) => { 
+                expect(res.body).toEqual({
+                    ...actor,
+                    id: 1,
+                    Film: { 
+                        id: '1',
+                        title: 'Iron Man',
+                        release: '2008-05-02'
+                    }
                 })
             })
     })
