@@ -54,8 +54,12 @@ describe('reviews routes', () => {
 
 		return request(app)
 			.get('/api/v1/reviews')
-			.then(res => expect(res.body.length).toBeLessThan(101));
-
+			.then(res => {
+				expect(res.body.length).toBeLessThan(101);
+				res.body.forEach((review, i) => {
+					expect(review.rating).toBeGreaterThanOrEqual(res.body[i + 1].rating);
+				});
+			});
 	});
 
 	it('deletes a review', () => {
