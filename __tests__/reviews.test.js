@@ -56,11 +56,14 @@ describe.skip('reviews routes', () => {
       .send({
         ...newReview,
         ReviewerId: 1,
+        FilmId: 1
       })
       .then((res) =>
         expect(res.body).toEqual({
           id: 2,
           ...newReview,
+          ReviewId: 1,
+          FilmId: 1
         })
       );
   });

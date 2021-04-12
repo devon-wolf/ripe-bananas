@@ -33,6 +33,14 @@ const studio = {
   country: 'United States',
 };
 
+const fakeRole = {
+  FilmId: 1,
+  ActorId: 1,
+  role: 'Jim'
+};
+
+const fakeCast = [fakeRole];
+
 describe('ripe-bananas film routes', () => {
   beforeEach(() => {
     return db.sync({ force: true });
@@ -44,19 +52,14 @@ describe('ripe-bananas film routes', () => {
     originalStudio = await Studio.create(studio);
   });
   beforeEach(async () => {
-    originalFilm = await Film.create(film);
+    originalFilm = await Film.create(film, { include: [actor] });
   });
 
-  it('creates a new Film', () => {
+  it.only('creates a new Film', () => {
     const newFilm = {
       title: 'The Vacant Owl',
       released: '2011',
-      //   cast: [
-      //     {
-      //       role: 'Mary Feather',
-      //       actor: 20,
-      //     },
-      //   ],
+      cast: fakeCast
     };
 
     return request(app)
@@ -96,7 +99,6 @@ describe('ripe-bananas film routes', () => {
     return request(app)
       .get('/api/v1/films/1')
       .then((res) => {
-        console.log('hey', res.body);
         expect(res.body).toEqual({
           id: 1,
           title: 'Forgotten Martians',

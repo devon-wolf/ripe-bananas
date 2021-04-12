@@ -3,7 +3,7 @@ const db = require('../lib/utils/database');
 const request = require('supertest');
 const app = require('../lib/app');
 const Reviewer = require('../lib/models/Reviewer');
-const Review = require('../lib/models/Review');
+
 
 const reviewer = {
     name: 'Amadaeus Coconut',
