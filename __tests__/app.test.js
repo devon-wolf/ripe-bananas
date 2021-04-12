@@ -18,7 +18,7 @@ describe('ripe-bananas routes', () => {
     originalStudio = await Studio.create(studio);
   });
 
-  it('creates a new Studio', () => {
+  it.skip('creates a new Studio', () => {
     const newStudio = {
       name: 'Star Studios',
       city: 'Portland',
@@ -36,7 +36,7 @@ describe('ripe-bananas routes', () => {
         })
       })
   })
-  it('gets all Studios', async () => {
+  it.skip('gets all Studios', async () => {
     return request(app)
       .get('/api/v1/studios')
       .then((res) => {
@@ -46,7 +46,7 @@ describe('ripe-bananas routes', () => {
         }])
       })
   })
-  it('gets a Studio by id', async () => {
+  it.skip('gets a Studio by id', async () => {
     return request(app)
       .get('/api/v1/studios/1')
       .then((res) => {
