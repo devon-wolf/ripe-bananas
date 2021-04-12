@@ -55,7 +55,6 @@ describe('ripe-bananas routes', () => {
             .send({
                 rating: 2,
                 review: 'blah',
-                FilmId: 2,
                 ReviewerId: 1,
             })
         return request(app)
@@ -68,7 +67,6 @@ describe('ripe-bananas routes', () => {
                     Reviews: [{
                         rating: 2,
                         review: 'blah',
-                        FilmId: 2,
                         ReviewerId: 1,
                         id: 1,
                     }]
