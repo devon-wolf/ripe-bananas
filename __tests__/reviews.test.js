@@ -2,7 +2,7 @@
 const db = require('../lib/utils/database');
 const request = require('supertest');
 const app = require('../lib/app');
-const Review = require('../lib/models/Review');
+const { createFakeReviews } = require('../lib/utils/data-generator');
 
 const seedReview = {
 	rating: 2,
@@ -47,6 +47,15 @@ describe('reviews routes', () => {
 				id: 1,
 				...seedReview
 			}]));
+	});
+
+	it('correctly truncates and sorts reviews', async () => {
+		await createFakeReviews(200);
+
+		return request(app)
+			.get('/api/v1/reviews')
+			.then(res => expect(res.body.length).toBeLessThan(101));
+
 	});
 
 	it('deletes a review', () => {
