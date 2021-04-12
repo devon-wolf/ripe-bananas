@@ -57,7 +57,7 @@ describe('reviews routes', () => {
 			.then(res => {
 				expect(res.body.length).toBeLessThan(101);
 				res.body.forEach((review, i) => {
-					expect(review.rating).toBeGreaterThanOrEqual(res.body[i + 1].rating);
+					if (i < res.body.length - 1) expect(review.rating).toBeGreaterThanOrEqual(res.body[i + 1].rating);
 				});
 			});
 	});
