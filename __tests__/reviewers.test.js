@@ -1,19 +1,20 @@
-// require('../lib/models/associations')
+require('../lib/models/associations')
 const db = require('../lib/utils/database');
 const request = require('supertest');
 const app = require('../lib/app');
 const Reviewer = require('../lib/models/Reviewer');
+const Review = require('../lib/models/Review');
 
 const reviewer = {
     name: 'Amadaeus Coconut',
     company: 'Island Time Reviews',
-};
-const review = {
-    id: reviewer.id,
-    rating: 3,
-    review: 'not good',
-    film: 'film stuff'
 
+};
+
+const reviewertoo = {
+    name: 'Batman',
+    company: 'Bat Time Reviews',
+    id: 2
 };
 
 
@@ -54,13 +55,29 @@ describe('ripe-bananas routes', () => {
     })
 
     // get by id
-    it('gets a reviewer and their reviews when given an id', () => {
+    it('gets a reviewer and their reviews when given an id', async () => {
+        await request(app)
+            .post('/api/v1/reviews')
+            .send({
+                rating: 2,
+                review: 'blah',
+                FilmId: 2,
+                ReviewerId: 1,
+            })
         return request(app)
             .get('/api/v1/reviewers/1')
             .then((res) => {
+                console.log(res.body);
                 expect(res.body).toEqual({
                     ...reviewer,
-                    id: 1
+                    id: 1,
+                    Reviews: [{
+                        rating: 2,
+                        review: 'blah',
+                        FilmId: 2,
+                        ReviewerId: 1,
+                        id: 1,
+                    }]
                 })
             })
     })
