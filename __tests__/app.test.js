@@ -12,7 +12,7 @@ const studio = {
 
 describe('ripe-bananas routes', () => {
   beforeEach(() => {
-    return db.sync({ force: true });
+    return db.sync({force: true});
   });
   beforeEach(async () => {
     originalStudio = await Studio.create(studio);
