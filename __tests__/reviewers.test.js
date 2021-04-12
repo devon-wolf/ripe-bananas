@@ -12,7 +12,7 @@ const reviewer = {
 };
 
 
-describe('ripe-bananas routes', () => {
+describe.skip('ripe-bananas routes', () => {
     beforeEach(() => {
         return db.sync({force: true});
     });
