@@ -10,7 +10,7 @@ const studio = {
   country: 'United States',
 };
 
-describe.skip('ripe-bananas routes', () => {
+describe('ripe-bananas routes', () => {
   beforeEach(() => {
     return db.sync({ force: true });
   });
@@ -18,7 +18,7 @@ describe.skip('ripe-bananas routes', () => {
     originalStudio = await Studio.create(studio);
   });
 
-  it.skip('creates a new Studio', () => {
+  it('creates a new Studio', () => {
     const newStudio = {
       name: 'Star Studios',
       city: 'Portland',
