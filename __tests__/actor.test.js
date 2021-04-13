@@ -1,4 +1,4 @@
-require('../lib/models/associations');
+const {Cast} = require('../lib/models/associations');
 const db = require('../lib/utils/database');
 const request = require('supertest');
 const app = require('../lib/app');
@@ -24,11 +24,14 @@ const film = {
   released: '2008-05-02',
   StudioId: 1,
   ActorId: 1,
+  cast: [
+    actor,
+  ]
 };
 
-describe.skip('ripe-banana actor routes', () => {
+describe('ripe-banana actor routes', () => {
   beforeEach(() => {
-    return db.sync({ force: true });
+    return db.sync({force: true});
   });
   beforeEach(async () => {
     originalActor = await Actor.create(actor);
@@ -37,7 +40,7 @@ describe.skip('ripe-banana actor routes', () => {
     originalStudio = await Studio.create(studio);
   });
   beforeEach(async () => {
-    originalFilm = await Film.create(film);
+    originalFilm = await Film.create(film, {include: [{association: Cast, as: 'cast'}]});
   });
 
   it('creates a new Actor', () => {
@@ -53,7 +56,7 @@ describe.skip('ripe-banana actor routes', () => {
       .then((res) => {
         expect(res.body).toEqual({
           ...newActor,
-          id: 2,
+          id: 3,
         });
       });
   });
@@ -61,12 +64,10 @@ describe.skip('ripe-banana actor routes', () => {
     return request(app)
       .get('/api/v1/actors')
       .then((res) => {
-        expect(res.body).toEqual([
-          {
-            ...actor,
-            id: 1,
-          },
-        ]);
+        console.log(res.body);
+        expect(res.body).toEqual(
+          [{id: 2, name: actor.name}],
+        );
       });
   });
 
@@ -77,7 +78,7 @@ describe.skip('ripe-banana actor routes', () => {
         expect(res.body).toEqual({
           ...actor,
           id: 1,
-          Films: [{ ...film, id: 1 }],
+          Films: [{...film, id: 1}],
         });
       });
   });

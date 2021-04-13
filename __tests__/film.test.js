@@ -1,4 +1,4 @@
-require('../lib/models/associations');
+const {Cast} = require('../lib/models/associations');
 
 const db = require('../lib/utils/database');
 const request = require('supertest');
@@ -17,13 +17,9 @@ const film = {
   title: 'Forgotten Martians',
   released: 1976,
   StudioId: 1,
-  ActorId: 1,
-  //   cast: [
-  //     {
-  //       role: 'Gerard Socksmith',
-  //       actor: 14,
-  //     },
-  //   ],
+  cast: [
+    actor
+  ],
 };
 
 const studio = {
@@ -34,16 +30,14 @@ const studio = {
 };
 
 const fakeRole = {
-  FilmId: 1,
-  ActorId: 1,
-  role: 'Jim'
+  ActorId: 1
 };
 
 const fakeCast = [fakeRole];
 
 describe('ripe-bananas film routes', () => {
   beforeEach(() => {
-    return db.sync({ force: true });
+    return db.sync({force: true});
   });
   beforeEach(async () => {
     originalActor = await Actor.create(actor);
@@ -52,14 +46,14 @@ describe('ripe-bananas film routes', () => {
     originalStudio = await Studio.create(studio);
   });
   beforeEach(async () => {
-    originalFilm = await Film.create(film, { include: [actor] });
+    originalFilm = await Film.create(film, {include: [{association: Cast, as: 'cast'}]});
   });
 
-  it.only('creates a new Film', () => {
+  it('creates a new Film', () => {
     const newFilm = {
       title: 'The Vacant Owl',
       released: '2011',
-      cast: fakeCast
+      // cast: fakeCast
     };
 
     return request(app)
@@ -67,13 +61,12 @@ describe('ripe-bananas film routes', () => {
       .send({
         ...newFilm,
         StudioId: 1,
-        ActorId: 1
-        })
+      })
       .then((res) => {
+        console.log(res.body);
         expect(res.body).toEqual({
           ...newFilm,
           StudioId: 1,
-          ActorId: 1,
           id: 2,
         });
       });
@@ -88,14 +81,13 @@ describe('ripe-bananas film routes', () => {
             id: 1,
             title: 'Forgotten Martians',
             StudioId: 1,
-            ActorId: 1,
             released: '1976',
           },
         ]);
       });
   });
 
-  it.skip('gets a single film by id', () => {
+  it('gets a single film by id', () => {
     return request(app)
       .get('/api/v1/films/1')
       .then((res) => {
@@ -104,7 +96,8 @@ describe('ripe-bananas film routes', () => {
           title: 'Forgotten Martians',
           StudioId: 1,
           released: '1976',
-          cast: actor,
+          cast: [{id: 2, name: actor.name}],
+          Reviews: []
         });
       });
   });
