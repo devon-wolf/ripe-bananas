@@ -26,7 +26,7 @@ const film = {
   ActorId: 1,
 };
 
-describe('ripe-banana actor routes', () => {
+describe.skip('ripe-banana actor routes', () => {
   beforeEach(() => {
     return db.sync({ force: true });
   });
@@ -71,13 +71,9 @@ describe('ripe-banana actor routes', () => {
   });
 
   it('gets an actor by id with Film Join', async () => {
-    // await request(app).post('/api/v1/films').send(film);
-
     return request(app)
       .get('/api/v1/actors/1')
       .then((res) => {
-        console.log(res.body);
-        console.log(film);
         expect(res.body).toEqual({
           ...actor,
           id: 1,
